@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard Spese Personali</title>
+  <meta
+    name="description"
+    content="Dashboard web responsive per la gestione delle spese personali con HTML, CSS, Bootstrap e JavaScript."
+  >
 
   <!-- Bootstrap 5.3 -->
   <link
@@ -11,97 +15,164 @@
     rel="stylesheet"
   >
 
+  <!-- Bootstrap Icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+  >
+
   <!-- CSS personalizzato -->
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <header class="py-4 shadow-sm bg-primary text-white">
+  <header class="py-5 shadow-sm">
     <div class="container">
-      <h1 class="mb-1">Dashboard Spese Personali</h1>
-      <p class="mb-0">Gestisci, modifica e monitora le tue spese in modo semplice</p>
+      <div class="row align-items-center g-4">
+        <div class="col-lg-8">
+          <span class="badge rounded-pill bg-light text-primary px-3 py-2 mb-3 fw-semibold">
+            Dashboard Finanze Personali
+          </span>
+          <h1 class="mb-3">Gestisci le tue spese in modo semplice e veloce</h1>
+          <p class="mb-0 fs-5">
+            Inserisci, modifica, elimina e filtra le tue spese personali in una dashboard moderna e responsive.
+          </p>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="card border-0 shadow-sm">
+            <div class="card-body text-dark">
+              <h2 class="h6 text-uppercase text-muted mb-3">Panoramica</h2>
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span>Gestione dinamica</span>
+                <i class="bi bi-lightning-charge-fill text-primary"></i>
+              </div>
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span>Filtri e ricerca</span>
+                <i class="bi bi-funnel-fill text-primary"></i>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <span>Layout responsive</span>
+                <i class="bi bi-phone-fill text-primary"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </header>
 
   <main class="container my-5">
 
-    <!-- Sezione form inserimento -->
-    <section class="mb-5">
+    <!-- FORM INSERIMENTO -->
+    <section class="mb-5" aria-labelledby="form-section-title">
       <div class="card shadow-sm border-0">
         <div class="card-body">
-          <h2 class="h4 mb-4">Aggiungi una nuova spesa</h2>
+          <div class="d-flex align-items-center mb-4 gap-2">
+            <i class="bi bi-plus-circle-fill text-primary fs-4"></i>
+            <h2 id="form-section-title" class="h4 mb-0">Aggiungi una nuova spesa</h2>
+          </div>
 
           <form id="expense-form" novalidate>
             <div class="row g-3">
               <div class="col-md-6">
                 <label for="description" class="form-label">Descrizione</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="description"
-                  placeholder="Es. Spesa supermercato"
-                  required
-                >
+                <div class="input-group">
+                  <span class="input-group-text">
+                    <i class="bi bi-card-text"></i>
+                  </span>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="description"
+                    placeholder="Es. Spesa supermercato"
+                    required
+                  >
+                </div>
               </div>
 
               <div class="col-md-6">
                 <label for="amount" class="form-label">Importo (€)</label>
-                <input
-                  type="number"
-                  class="form-control"
-                  id="amount"
-                  placeholder="Es. 45.90"
-                  min="0.01"
-                  step="0.01"
-                  required
-                >
+                <div class="input-group">
+                  <span class="input-group-text">€</span>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="amount"
+                    placeholder="Es. 45.90"
+                    min="0.01"
+                    step="0.01"
+                    required
+                  >
+                </div>
               </div>
 
               <div class="col-md-6">
                 <label for="category" class="form-label">Categoria</label>
-                <select id="category" class="form-select" required>
-                  <option value="">Seleziona una categoria</option>
-                  <option value="Casa">Casa</option>
-                  <option value="Cibo">Cibo</option>
-                  <option value="Trasporti">Trasporti</option>
-                  <option value="Tempo libero">Tempo libero</option>
-                  <option value="Salute">Salute</option>
-                  <option value="Altro">Altro</option>
-                </select>
+                <div class="input-group">
+                  <span class="input-group-text">
+                    <i class="bi bi-tags"></i>
+                  </span>
+                  <select id="category" class="form-select" required>
+                    <option value="">Seleziona una categoria</option>
+                    <option value="Casa">Casa</option>
+                    <option value="Cibo">Cibo</option>
+                    <option value="Trasporti">Trasporti</option>
+                    <option value="Tempo libero">Tempo libero</option>
+                    <option value="Salute">Salute</option>
+                    <option value="Altro">Altro</option>
+                  </select>
+                </div>
               </div>
 
               <div class="col-md-6">
                 <label for="date" class="form-label">Data</label>
-                <input
-                  type="date"
-                  class="form-control"
-                  id="date"
-                  required
-                >
+                <div class="input-group">
+                  <span class="input-group-text">
+                    <i class="bi bi-calendar-event"></i>
+                  </span>
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="date"
+                    required
+                  >
+                </div>
               </div>
             </div>
 
-            <div class="mt-4 d-flex gap-2">
+            <div class="mt-4 d-flex gap-2 flex-wrap">
               <button type="submit" class="btn btn-primary" id="submit-btn">
+                <i class="bi bi-plus-lg me-1"></i>
                 Aggiungi spesa
               </button>
+
               <button type="reset" class="btn btn-outline-secondary">
+                <i class="bi bi-eraser me-1"></i>
                 Svuota campi
               </button>
             </div>
           </form>
 
-          <div id="form-message" class="mt-3"></div>
+          <div id="form-message" class="mt-3" aria-live="polite"></div>
         </div>
       </div>
     </section>
 
-    <!-- Sezione riepilogo -->
-    <section class="mb-5">
+    <!-- RIEPILOGO -->
+    <section class="mb-5" aria-labelledby="summary-section-title">
+      <div class="d-flex align-items-center mb-3 gap-2">
+        <i class="bi bi-bar-chart-fill text-primary fs-4"></i>
+        <h2 id="summary-section-title" class="h4 mb-0">Riepilogo generale</h2>
+      </div>
+
       <div class="row g-3">
         <div class="col-md-6">
-          <div class="card text-center shadow-sm border-0 summary-card">
-            <div class="card-body">
+          <div class="card text-center shadow-sm border-0 summary-card h-100">
+            <div class="card-body d-flex flex-column justify-content-center">
+              <div class="mb-2">
+                <i class="bi bi-cash-coin fs-2 text-primary"></i>
+              </div>
               <h2 class="h5">Totale spese</h2>
               <p id="total-expenses" class="display-6 fw-bold mb-0">€ 0.00</p>
             </div>
@@ -109,8 +180,11 @@
         </div>
 
         <div class="col-md-6">
-          <div class="card text-center shadow-sm border-0 summary-card">
-            <div class="card-body">
+          <div class="card text-center shadow-sm border-0 summary-card h-100">
+            <div class="card-body d-flex flex-column justify-content-center">
+              <div class="mb-2">
+                <i class="bi bi-receipt-cutoff fs-2 text-primary"></i>
+              </div>
               <h2 class="h5">Numero totale spese</h2>
               <p id="expenses-count" class="display-6 fw-bold mb-0">0</p>
             </div>
@@ -119,46 +193,66 @@
       </div>
     </section>
 
-    <!-- Sezione filtri e ricerca -->
-    <section class="mb-5">
+    <!-- FILTRI -->
+    <section class="mb-5" aria-labelledby="filters-section-title">
       <div class="card shadow-sm border-0">
         <div class="card-body">
-          <h2 class="h4 mb-4">Filtri e ricerca</h2>
+          <div class="d-flex align-items-center mb-4 gap-2">
+            <i class="bi bi-funnel-fill text-primary fs-4"></i>
+            <h2 id="filters-section-title" class="h4 mb-0">Filtri e ricerca</h2>
+          </div>
 
           <div class="row g-3">
             <div class="col-md-6">
               <label for="filter-category" class="form-label">Filtra per categoria</label>
-              <select id="filter-category" class="form-select">
-                <option value="Tutte">Tutte le categorie</option>
-                <option value="Casa">Casa</option>
-                <option value="Cibo">Cibo</option>
-                <option value="Trasporti">Trasporti</option>
-                <option value="Tempo libero">Tempo libero</option>
-                <option value="Salute">Salute</option>
-                <option value="Altro">Altro</option>
-              </select>
+              <div class="input-group">
+                <span class="input-group-text">
+                  <i class="bi bi-filter"></i>
+                </span>
+                <select id="filter-category" class="form-select">
+                  <option value="Tutte">Tutte le categorie</option>
+                  <option value="Casa">Casa</option>
+                  <option value="Cibo">Cibo</option>
+                  <option value="Trasporti">Trasporti</option>
+                  <option value="Tempo libero">Tempo libero</option>
+                  <option value="Salute">Salute</option>
+                  <option value="Altro">Altro</option>
+                </select>
+              </div>
             </div>
 
             <div class="col-md-6">
               <label for="search-description" class="form-label">Cerca per descrizione</label>
-              <input
-                type="text"
-                id="search-description"
-                class="form-control"
-                placeholder="Scrivi una descrizione..."
-              >
+              <div class="input-group">
+                <span class="input-group-text">
+                  <i class="bi bi-search"></i>
+                </span>
+                <input
+                  type="text"
+                  id="search-description"
+                  class="form-control"
+                  placeholder="Scrivi una descrizione..."
+                >
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Sezione lista spese -->
-    <section>
+    <!-- LISTA SPESE -->
+    <section aria-labelledby="expenses-list-title">
       <div class="card shadow-sm border-0">
         <div class="card-body">
           <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
-            <h2 class="h4 mb-0">Lista delle spese</h2>
+            <div class="d-flex align-items-center gap-2">
+              <i class="bi bi-table text-primary fs-4"></i>
+              <h2 id="expenses-list-title" class="h4 mb-0">Lista delle spese</h2>
+            </div>
+
+            <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill">
+              Aggiornamento dinamico
+            </span>
           </div>
 
           <div class="table-responsive">
@@ -186,6 +280,12 @@
     </section>
 
   </main>
+
+  <footer class="py-4 mt-5 border-top bg-white">
+    <div class="container text-center text-muted">
+      <small>Progetto finale — Dashboard web per la gestione delle spese personali</small>
+    </div>
+  </footer>
 
   <!-- Bootstrap JS -->
   <script
