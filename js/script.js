@@ -20,17 +20,25 @@ let expensesChart = null;
 
 let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
 let editExpenseId = null;
+let messageTimeout = null;
 
 function saveToLocalStorage() {
   localStorage.setItem("expenses", JSON.stringify(expenses));
 }
 
 function showMessage(message, type = "success") {
+  clearTimeout(messageTimeout);
+
   formMessage.innerHTML = `
-    <div class="alert alert-${type}" role="alert">
+    <div class="alert alert-${type} alert-dismissible fade show" role="alert">
       ${message}
+      <button type="button" class="btn-close" aria-label="Close" onclick="clearMessage()"></button>
     </div>
   `;
+
+  messageTimeout = setTimeout(() => {
+    clearMessage();
+  }, 3000);
 }
 
 function clearMessage() {
@@ -131,7 +139,7 @@ function renderExpenses() {
 function resetForm() {
   expenseForm.reset();
   editExpenseId = null;
-  submitBtn.textContent = "Aggiungi spesa";
+  submitBtn.innerHTML = "Aggiungi spesa";
   setTodayDate();
 }
 
@@ -199,6 +207,18 @@ expenseForm.addEventListener("submit", function (event) {
 });
 
 function deleteExpense(id) {
+  const expenseToDelete = expenses.find((expense) => expense.id === id);
+  if (!expenseToDelete) return;
+
+  const confirmed = confirm(
+    `Vuoi davvero eliminare la spesa "${expenseToDelete.description}"?`
+  );
+
+  if (!confirmed) {
+    showMessage("Eliminazione annullata.", "secondary");
+    return;
+  }
+
   expenses = expenses.filter((expense) => expense.id !== id);
 
   saveToLocalStorage();
@@ -223,9 +243,9 @@ function editExpense(id) {
   dateInput.value = expenseToEdit.date;
 
   editExpenseId = id;
-  submitBtn.textContent = "Salva modifica";
+  submitBtn.innerHTML = "Salva modifica";
 
-  showMessage("Stai modificando una spesa.", "warning");
+  showMessage("Modalità modifica attiva: aggiorna i campi e salva.", "warning");
 
   window.scrollTo({
     top: 0,
@@ -318,6 +338,18 @@ searchDescription.addEventListener("input", renderExpenses);
 if (chartTypeSelect) {
   chartTypeSelect.addEventListener("change", updateChart);
 }
+
+expenseForm.addEventListener("reset", function () {
+  editExpenseId = null;
+  submitBtn.innerHTML = "Aggiungi spesa";
+  clearMessage();
+
+  setTimeout(() => {
+    setTodayDate();
+  }, 0);
+
+  showMessage("Modifica annullata e form ripristinato.", "secondary");
+});
 
 setTodayDate();
 updateSummary();
