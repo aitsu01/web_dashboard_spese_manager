@@ -224,3 +224,6 @@ searchDescription.addEventListener("input", renderExpenses);
 
 updateSummary();
 renderExpenses();
+
+
+dateInput.value = new Date().toISOString().split("T")[0];
