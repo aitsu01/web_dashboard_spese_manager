@@ -14,8 +14,12 @@ const searchDescription = document.getElementById("search-description");
 
 const expensesTableBody = document.getElementById("expenses-table-body");
 
-let expenses = [];
+let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
 let editExpenseId = null;
+
+function saveToLocalStorage() {
+  localStorage.setItem("expenses", JSON.stringify(expenses));
+}
 
 function showMessage(message, type = "success") {
   formMessage.innerHTML = `
@@ -77,7 +81,7 @@ function renderExpenses() {
 
   if (filteredExpenses.length === 0) {
     expensesTableBody.innerHTML = `
-      <tr id="empty-row">
+      <tr>
         <td colspan="5" class="text-center text-muted py-4">
           Nessuna spesa trovata.
         </td>
@@ -176,6 +180,7 @@ expenseForm.addEventListener("submit", function (event) {
     showMessage("Spesa aggiunta con successo.", "success");
   }
 
+  saveToLocalStorage();
   updateSummary();
   renderExpenses();
   resetForm();
@@ -183,7 +188,7 @@ expenseForm.addEventListener("submit", function (event) {
 
 function deleteExpense(id) {
   expenses = expenses.filter((expense) => expense.id !== id);
-
+  saveToLocalStorage();
   updateSummary();
   renderExpenses();
   showMessage("Spesa eliminata con successo.", "info");
@@ -207,6 +212,7 @@ function editExpense(id) {
   submitBtn.textContent = "Salva modifica";
 
   showMessage("Stai modificando una spesa.", "warning");
+
   window.scrollTo({
     top: 0,
     behavior: "smooth"
