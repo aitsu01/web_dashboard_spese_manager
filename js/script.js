@@ -21,6 +21,7 @@ let expensesChart = null;
 let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
 let editExpenseId = null;
 let messageTimeout = null;
+let isProgrammaticReset = false;
 
 function saveToLocalStorage() {
   localStorage.setItem("expenses", JSON.stringify(expenses));
@@ -137,10 +138,15 @@ function renderExpenses() {
 }
 
 function resetForm() {
+  isProgrammaticReset = true;
   expenseForm.reset();
   editExpenseId = null;
   submitBtn.innerHTML = "Aggiungi spesa";
   setTodayDate();
+
+  setTimeout(() => {
+    isProgrammaticReset = false;
+  }, 0);
 }
 
 function validateForm(description, amount, category, date) {
@@ -184,7 +190,7 @@ expenseForm.addEventListener("submit", function (event) {
         date
       };
 
-      showMessage("Spesa modificata con successo.", "warning");
+      showMessage("Spesa modificata correttamente.", "success");
     }
   } else {
     const newExpense = {
@@ -196,7 +202,7 @@ expenseForm.addEventListener("submit", function (event) {
     };
 
     expenses.push(newExpense);
-    showMessage("Spesa aggiunta con successo.", "success");
+    showMessage("Spesa aggiunta correttamente.", "success");
   }
 
   saveToLocalStorage();
@@ -225,7 +231,7 @@ function deleteExpense(id) {
   updateSummary();
   renderExpenses();
   updateChart();
-  showMessage("Spesa eliminata con successo.", "info");
+  showMessage("Spesa eliminata correttamente.", "info");
 
   if (editExpenseId === id) {
     resetForm();
@@ -245,7 +251,10 @@ function editExpense(id) {
   editExpenseId = id;
   submitBtn.innerHTML = "Salva modifica";
 
-  showMessage("Modalità modifica attiva: aggiorna i campi e salva.", "warning");
+  showMessage(
+    "Stai modificando una spesa. Aggiorna i campi e salva le modifiche.",
+    "warning"
+  );
 
   window.scrollTo({
     top: 0,
@@ -348,7 +357,9 @@ expenseForm.addEventListener("reset", function () {
     setTodayDate();
   }, 0);
 
-  showMessage("Modifica annullata e form ripristinato.", "secondary");
+  if (!isProgrammaticReset) {
+    showMessage("Operazione annullata. Il form è stato ripristinato.", "secondary");
+  }
 });
 
 setTodayDate();
