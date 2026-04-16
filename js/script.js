@@ -14,6 +14,9 @@ const searchDescription = document.getElementById("search-description");
 
 const expensesTableBody = document.getElementById("expenses-table-body");
 
+const chartCanvas = document.getElementById("expenses-chart");
+let expensesChart = null;
+
 let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
 let editExpenseId = null;
 
@@ -33,9 +36,13 @@ function clearMessage() {
   formMessage.innerHTML = "";
 }
 
+function setTodayDate() {
+  dateInput.value = new Date().toISOString().split("T")[0];
+}
+
 function formatDate(dateString) {
-  const date = new Date(dateString);
-  return date.toLocaleDateString("it-IT");
+  const [year, month, day] = dateString.split("-");
+  return `${day}/${month}/${year}`;
 }
 
 function getCategoryBadgeClass(category) {
@@ -124,15 +131,16 @@ function resetForm() {
   expenseForm.reset();
   editExpenseId = null;
   submitBtn.textContent = "Aggiungi spesa";
+  setTodayDate();
 }
 
 function validateForm(description, amount, category, date) {
-  if (!description || !amount || !category || !date) {
+  if (!description || !category || !date || isNaN(amount)) {
     showMessage("Tutti i campi sono obbligatori.", "danger");
     return false;
   }
 
-  if (isNaN(amount) || Number(amount) <= 0) {
+  if (Number(amount) <= 0) {
     showMessage("L'importo deve essere un numero maggiore di 0.", "danger");
     return false;
   }
@@ -154,7 +162,9 @@ expenseForm.addEventListener("submit", function (event) {
   }
 
   if (editExpenseId !== null) {
-    const expenseIndex = expenses.findIndex((expense) => expense.id === editExpenseId);
+    const expenseIndex = expenses.findIndex(
+      (expense) => expense.id === editExpenseId
+    );
 
     if (expenseIndex !== -1) {
       expenses[expenseIndex] = {
@@ -183,14 +193,17 @@ expenseForm.addEventListener("submit", function (event) {
   saveToLocalStorage();
   updateSummary();
   renderExpenses();
+  updateChart();
   resetForm();
 });
 
 function deleteExpense(id) {
   expenses = expenses.filter((expense) => expense.id !== id);
+
   saveToLocalStorage();
   updateSummary();
   renderExpenses();
+  updateChart();
   showMessage("Spesa eliminata con successo.", "info");
 
   if (editExpenseId === id) {
@@ -219,11 +232,61 @@ function editExpense(id) {
   });
 }
 
+function updateChart() {
+  if (!chartCanvas) return;
+
+  const categoryTotals = {
+    Casa: 0,
+    Cibo: 0,
+    Trasporti: 0,
+    "Tempo libero": 0,
+    Salute: 0,
+    Altro: 0
+  };
+
+  expenses.forEach((expense) => {
+    if (categoryTotals.hasOwnProperty(expense.category)) {
+      categoryTotals[expense.category] += expense.amount;
+    } else {
+      categoryTotals["Altro"] += expense.amount;
+    }
+  });
+
+  const labels = Object.keys(categoryTotals);
+  const data = Object.values(categoryTotals);
+
+  if (expensesChart) {
+    expensesChart.destroy();
+  }
+
+  expensesChart = new Chart(chartCanvas, {
+    type: "doughnut",
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: "Spese per categoria",
+          data: data,
+          borderWidth: 2
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: "bottom"
+        }
+      }
+    }
+  });
+}
+
 filterCategory.addEventListener("change", renderExpenses);
 searchDescription.addEventListener("input", renderExpenses);
 
+setTodayDate();
 updateSummary();
 renderExpenses();
-
-
-dateInput.value = new Date().toISOString().split("T")[0];
+updateChart();

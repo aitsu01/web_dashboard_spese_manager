@@ -340,3 +340,21 @@ h2,
     font-size: 0.9rem;
   }
 }
+
+
+.chart-container {
+  position: relative;
+  width: 100%;
+  min-height: 320px;
+}
+
+.chart-container canvas {
+  width: 100% !important;
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  .chart-container {
+    min-height: 260px;
+  }
+}
