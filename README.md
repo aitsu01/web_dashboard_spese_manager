@@ -83,7 +83,6 @@ web_dashboard_spese_manager/
 │   └── script.js
 
 
-
 Struttura dell’interfaccia
 
 La dashboard è composta da:
@@ -94,7 +93,6 @@ riepilogo generale con totale e numero spese
 grafico delle spese per categoria
 sezione filtri, ricerca e ordinamento
 tabella dinamica con elenco delle spese registrate
-
 
 
 Come funziona
@@ -127,7 +125,7 @@ la spesa viene rimossa dall’array
 il riepilogo viene aggiornato
 il grafico viene aggiornato
 la tabella viene aggiornata
-4. Filtri e ricerca
+4. Filtri, ricerca e ordinamento
 
 L’utente può:
 
@@ -137,7 +135,6 @@ ordinare l’elenco per importo o data
 5. Grafico
 
 Le spese vengono raggruppate per categoria e mostrate in un grafico aggiornato automaticamente a ogni modifica dei dati.
-
 
 
 Categorie utilizzate
@@ -150,9 +147,6 @@ Trasporti
 Tempo libero
 Salute
 Altro
-
-
-
 Caratteristiche responsive
 
 Il progetto è stato progettato per adattarsi a:
@@ -170,13 +164,33 @@ tabella scrollabile in mobile
 miglior gestione delle azioni nella colonna finale
 
 
-Come avviare il progetto
-Clonare la repository:
 
+1) Come avviare il progetto
+Clonare la repository:
 git clone https://github.com/aitsu01/web_dashboard_spese_manager.git
 
 
-Aprire la cartella del progetto
-Avviare il file index.html nel browser
+2)Aprire la cartella del progetto
+3)Avviare il file index.html nel browser
 
 
+Avvio con Visual Studio Code
+
+Per eseguire il progetto in locale con Visual Studio Code:
+
+1)Aprire Visual Studio Code
+2)Selezionare File > Open Folder
+3)Aprire la cartella del progetto web_dashboard_spese_manager
+4)Installare l’estensione Live Server
+5)Aprire il file index.html
+6)Fare clic destro su index.html
+7)Selezionare Open with Live Server
+
+Il progetto verrà aperto nel browser su un indirizzo locale simile a:
+
+http://127.0.0.1:5500/index.html
+
+
+Alternativa senza estensioni
+
+È possibile anche aprire direttamente index.html nel browser, ma usare Live Server è consigliato durante lo sviluppo perché aggiorna automaticamente la pagina dopo ogni modifica.
