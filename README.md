@@ -147,21 +147,23 @@ Trasporti
 Tempo libero
 Salute
 Altro
-Caratteristiche responsive
+
+
+Caratteristiche responsive:
 
 Il progetto è stato progettato per adattarsi a:
 
-desktop
-tablet
-smartphone
+-desktop
+-tablet
+-smartphone
 
 Sono stati curati:
 
-layout flessibile con Bootstrap
-adattamento del form
-leggibilità dei riepiloghi
-tabella scrollabile in mobile
-miglior gestione delle azioni nella colonna finale
+-layout flessibile con Bootstrap
+-adattamento del form
+-leggibilità dei riepiloghi
+-tabella scrollabile in mobile
+-miglior gestione delle azioni nella colonna finale
 
 
 
