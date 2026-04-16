@@ -176,6 +176,8 @@ expenseForm.addEventListener("submit", function (event) {
     return;
   }
 
+  let successMessage = "";
+
   if (editExpenseId !== null) {
     const expenseIndex = expenses.findIndex(
       (expense) => expense.id === editExpenseId
@@ -190,7 +192,7 @@ expenseForm.addEventListener("submit", function (event) {
         date
       };
 
-      showMessage("Spesa modificata correttamente.", "success");
+      successMessage = "Spesa modificata correttamente.";
     }
   } else {
     const newExpense = {
@@ -202,7 +204,7 @@ expenseForm.addEventListener("submit", function (event) {
     };
 
     expenses.push(newExpense);
-    showMessage("Spesa aggiunta correttamente.", "success");
+    successMessage = "Spesa aggiunta correttamente.";
   }
 
   saveToLocalStorage();
@@ -210,6 +212,7 @@ expenseForm.addEventListener("submit", function (event) {
   renderExpenses();
   updateChart();
   resetForm();
+  showMessage(successMessage, "success");
 });
 
 function deleteExpense(id) {
@@ -351,13 +354,13 @@ if (chartTypeSelect) {
 expenseForm.addEventListener("reset", function () {
   editExpenseId = null;
   submitBtn.innerHTML = "Aggiungi spesa";
-  clearMessage();
 
   setTimeout(() => {
     setTodayDate();
   }, 0);
 
   if (!isProgrammaticReset) {
+    clearMessage();
     showMessage("Operazione annullata. Il form è stato ripristinato.", "secondary");
   }
 });
