@@ -224,51 +224,70 @@
    
 
     <!-- FILTRI -->
-    <section class="mb-5" aria-labelledby="filters-section-title">
-      <div class="card shadow-sm border-0">
-        <div class="card-body">
-          <div class="d-flex align-items-center mb-4 gap-2">
-            <i class="bi bi-funnel-fill text-primary fs-4"></i>
-            <h2 id="filters-section-title" class="h4 mb-0">Filtri e ricerca</h2>
+
+    <!-- FILTRI -->
+<section class="mb-5" aria-labelledby="filters-section-title">
+  <div class="card shadow-sm border-0">
+    <div class="card-body">
+      <div class="d-flex align-items-center mb-4 gap-2">
+        <i class="bi bi-funnel-fill text-primary fs-4"></i>
+        <h2 id="filters-section-title" class="h4 mb-0">Filtri, ricerca e ordinamento</h2>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-md-4">
+          <label for="filter-category" class="form-label">Filtra per categoria</label>
+          <div class="input-group">
+            <span class="input-group-text">
+              <i class="bi bi-filter"></i>
+            </span>
+            <select id="filter-category" class="form-select">
+              <option value="Tutte">Tutte le categorie</option>
+              <option value="Casa">Casa</option>
+              <option value="Cibo">Cibo</option>
+              <option value="Trasporti">Trasporti</option>
+              <option value="Tempo libero">Tempo libero</option>
+              <option value="Salute">Salute</option>
+              <option value="Altro">Altro</option>
+            </select>
           </div>
+        </div>
 
-          <div class="row g-3">
-            <div class="col-md-6">
-              <label for="filter-category" class="form-label">Filtra per categoria</label>
-              <div class="input-group">
-                <span class="input-group-text">
-                  <i class="bi bi-filter"></i>
-                </span>
-                <select id="filter-category" class="form-select">
-                  <option value="Tutte">Tutte le categorie</option>
-                  <option value="Casa">Casa</option>
-                  <option value="Cibo">Cibo</option>
-                  <option value="Trasporti">Trasporti</option>
-                  <option value="Tempo libero">Tempo libero</option>
-                  <option value="Salute">Salute</option>
-                  <option value="Altro">Altro</option>
-                </select>
-              </div>
-            </div>
+        <div class="col-md-4">
+          <label for="search-description" class="form-label">Cerca per descrizione</label>
+          <div class="input-group">
+            <span class="input-group-text">
+              <i class="bi bi-search"></i>
+            </span>
+            <input
+              type="text"
+              id="search-description"
+              class="form-control"
+              placeholder="Scrivi una descrizione..."
+            >
+          </div>
+        </div>
 
-            <div class="col-md-6">
-              <label for="search-description" class="form-label">Cerca per descrizione</label>
-              <div class="input-group">
-                <span class="input-group-text">
-                  <i class="bi bi-search"></i>
-                </span>
-                <input
-                  type="text"
-                  id="search-description"
-                  class="form-control"
-                  placeholder="Scrivi una descrizione..."
-                >
-              </div>
-            </div>
+        <div class="col-md-4">
+          <label for="sort-expenses" class="form-label">Ordina per</label>
+          <div class="input-group">
+            <span class="input-group-text">
+              <i class="bi bi-sort-down"></i>
+            </span>
+            <select id="sort-expenses" class="form-select">
+              <option value="default">Nessun ordinamento</option>
+              <option value="date-desc">Data più recente</option>
+              <option value="date-asc">Data più vecchia</option>
+              <option value="amount-desc">Importo decrescente</option>
+              <option value="amount-asc">Importo crescente</option>
+            </select>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
+   
 
     <!-- LISTA SPESE -->
     <section aria-labelledby="expenses-list-title">

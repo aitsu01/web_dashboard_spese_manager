@@ -11,6 +11,7 @@ const expensesCountEl = document.getElementById("expenses-count");
 
 const filterCategory = document.getElementById("filter-category");
 const searchDescription = document.getElementById("search-description");
+const sortExpenses = document.getElementById("sort-expenses");
 
 const expensesTableBody = document.getElementById("expenses-table-body");
 
@@ -81,8 +82,9 @@ function updateSummary() {
 function getFilteredExpenses() {
   const selectedCategory = filterCategory.value;
   const searchText = searchDescription.value.trim().toLowerCase();
+  const sortValue = sortExpenses ? sortExpenses.value : "default";
 
-  return expenses.filter((expense) => {
+  let filteredExpenses = expenses.filter((expense) => {
     const matchesCategory =
       selectedCategory === "Tutte" || expense.category === selectedCategory;
 
@@ -91,6 +93,18 @@ function getFilteredExpenses() {
 
     return matchesCategory && matchesSearch;
   });
+
+  if (sortValue === "amount-asc") {
+    filteredExpenses.sort((a, b) => a.amount - b.amount);
+  } else if (sortValue === "amount-desc") {
+    filteredExpenses.sort((a, b) => b.amount - a.amount);
+  } else if (sortValue === "date-asc") {
+    filteredExpenses.sort((a, b) => new Date(a.date) - new Date(b.date));
+  } else if (sortValue === "date-desc") {
+    filteredExpenses.sort((a, b) => new Date(b.date) - new Date(a.date));
+  }
+
+  return filteredExpenses;
 }
 
 function renderExpenses() {
@@ -296,11 +310,11 @@ function updateChart() {
   expensesChart = new Chart(chartCanvas, {
     type: selectedType,
     data: {
-      labels: labels,
+      labels,
       datasets: [
         {
           label: "Spese per categoria",
-          data: data,
+          data,
           backgroundColor: [
             "rgba(13, 110, 253, 0.7)",
             "rgba(25, 135, 84, 0.7)",
@@ -346,6 +360,10 @@ function updateChart() {
 
 filterCategory.addEventListener("change", renderExpenses);
 searchDescription.addEventListener("input", renderExpenses);
+
+if (sortExpenses) {
+  sortExpenses.addEventListener("change", renderExpenses);
+}
 
 if (chartTypeSelect) {
   chartTypeSelect.addEventListener("change", updateChart);
