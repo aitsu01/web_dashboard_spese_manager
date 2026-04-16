@@ -193,12 +193,25 @@
       </div>
     </section>
 
-    <section class="mb-5" aria-labelledby="chart-section-title">
+    <!-- TABELLE  -->
+   <section class="mb-5" aria-labelledby="chart-section-title">
   <div class="card shadow-sm border-0">
     <div class="card-body">
-      <div class="d-flex align-items-center mb-4 gap-2">
-        <i class="bi bi-pie-chart-fill text-primary fs-4"></i>
-        <h2 id="chart-section-title" class="h4 mb-0">Grafico spese per categoria</h2>
+      <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+        <div class="d-flex align-items-center gap-2">
+          <i class="bi bi-pie-chart-fill text-primary fs-4"></i>
+          <h2 id="chart-section-title" class="h4 mb-0">Grafico spese per categoria</h2>
+        </div>
+
+        <div class="chart-select-wrapper">
+          <label for="chart-type" class="form-label mb-1">Tipo di grafico</label>
+          <select id="chart-type" class="form-select">
+            <option value="doughnut">Ciambella</option>
+            <option value="pie">Torta</option>
+            <option value="bar">Barre</option>
+            <option value="line">Linea</option>
+          </select>
+        </div>
       </div>
 
       <div class="chart-container">
@@ -207,6 +220,8 @@
     </div>
   </div>
 </section>
+
+   
 
     <!-- FILTRI -->
     <section class="mb-5" aria-labelledby="filters-section-title">

@@ -15,6 +15,7 @@ const searchDescription = document.getElementById("search-description");
 const expensesTableBody = document.getElementById("expenses-table-body");
 
 const chartCanvas = document.getElementById("expenses-chart");
+const chartTypeSelect = document.getElementById("chart-type");
 let expensesChart = null;
 
 let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
@@ -254,20 +255,39 @@ function updateChart() {
 
   const labels = Object.keys(categoryTotals);
   const data = Object.values(categoryTotals);
+  const selectedType = chartTypeSelect ? chartTypeSelect.value : "doughnut";
 
   if (expensesChart) {
     expensesChart.destroy();
   }
 
   expensesChart = new Chart(chartCanvas, {
-    type: "doughnut",
+    type: selectedType,
     data: {
       labels: labels,
       datasets: [
         {
           label: "Spese per categoria",
           data: data,
-          borderWidth: 2
+          backgroundColor: [
+            "rgba(13, 110, 253, 0.7)",
+            "rgba(25, 135, 84, 0.7)",
+            "rgba(255, 193, 7, 0.7)",
+            "rgba(13, 202, 240, 0.7)",
+            "rgba(220, 53, 69, 0.7)",
+            "rgba(108, 117, 125, 0.7)"
+          ],
+          borderColor: [
+            "rgba(13, 110, 253, 1)",
+            "rgba(25, 135, 84, 1)",
+            "rgba(255, 193, 7, 1)",
+            "rgba(13, 202, 240, 1)",
+            "rgba(220, 53, 69, 1)",
+            "rgba(108, 117, 125, 1)"
+          ],
+          borderWidth: 2,
+          fill: selectedType === "line" ? false : true,
+          tension: selectedType === "line" ? 0.3 : 0
         }
       ]
     },
@@ -276,15 +296,28 @@ function updateChart() {
       maintainAspectRatio: false,
       plugins: {
         legend: {
+          display: selectedType !== "bar" && selectedType !== "line",
           position: "bottom"
         }
-      }
+      },
+      scales:
+        selectedType === "bar" || selectedType === "line"
+          ? {
+              y: {
+                beginAtZero: true
+              }
+            }
+          : {}
     }
   });
 }
 
 filterCategory.addEventListener("change", renderExpenses);
 searchDescription.addEventListener("input", renderExpenses);
+
+if (chartTypeSelect) {
+  chartTypeSelect.addEventListener("change", updateChart);
+}
 
 setTodayDate();
 updateSummary();
