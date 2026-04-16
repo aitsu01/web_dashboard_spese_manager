@@ -2,36 +2,62 @@
 
 Dashboard web responsive per la gestione delle spese personali, realizzata come progetto finale con **HTML5**, **CSS3**, **Bootstrap 5.3**, **JavaScript**, manipolazione del **DOM**, **Git/GitHub** e integrazione di **Chart.js**.
 
-**Tecnologie utilizzate:** HTML5 · CSS3 · Bootstrap 5.3 · JavaScript · DOM · localStorage · Chart.js · GitHub
+## Descrizione del progetto
 
-> L'applicazione permette all'utente di aggiungere, modificare, eliminare, filtrare e cercare spese, con aggiornamento dinamico della dashboard e visualizzazione grafica per categoria.
+L’applicazione permette all’utente di gestire le proprie spese personali tramite una dashboard semplice, moderna e responsive.  
+Ogni spesa può essere inserita, modificata, eliminata e visualizzata dinamicamente nella pagina senza ricaricare il browser.
 
-## Obiettivo del progetto
+Ogni voce contiene:
 
-L’obiettivo del progetto è simulare una piccola dashboard per la gestione delle spese personali.  
-L’utente può inserire una spesa e visualizzarla nella pagina senza ricaricarla, grazie alla manipolazione dinamica del DOM tramite JavaScript.
+- descrizione
+- importo
+- categoria
+- data
 
-Ogni spesa contiene almeno le seguenti informazioni:
+Il progetto è stato sviluppato come **single page application** lato client, senza backend.
 
-- Descrizione
-- Importo
-- Categoria
-- Data
+---
 
 ## Funzionalità implementate
 
-- Inserimento di una nuova spesa tramite form
-- Validazione dei campi obbligatori
-- Visualizzazione dinamica delle spese in tabella
-- Modifica di una spesa esistente
-- Eliminazione di una spesa con conferma
-- Riepilogo generale con totale spese e numero spese
-- Filtro per categoria
-- Ricerca per descrizione
-- Salvataggio dati con localStorage
-- Grafico dinamico delle spese per categoria
-- Scelta del tipo di grafico: ciambella, torta, barre, linea
-- Messaggi di feedback migliorati per una UX più chiara
+### Gestione spese
+- inserimento di una nuova spesa tramite form
+- validazione dei campi obbligatori
+- visualizzazione dinamica delle spese nella tabella
+- modifica di una spesa esistente
+- eliminazione di una spesa con conferma
+
+### Riepilogo dinamico
+- totale complessivo delle spese
+- numero totale delle spese inserite
+
+### Filtri e strumenti di ricerca
+- filtro per categoria
+- ricerca per descrizione
+- ordinamento per:
+  - data più recente
+  - data più vecchia
+  - importo crescente
+  - importo decrescente
+
+### Persistenza dati
+- salvataggio delle spese con `localStorage`
+
+### Grafico interattivo
+- grafico dinamico delle spese per categoria con **Chart.js**
+- possibilità di selezionare il tipo di grafico:
+  - ciambella
+  - torta
+  - barre
+  - linea
+
+### Esperienza utente
+- messaggi di feedback per aggiunta, modifica, eliminazione e annullamento
+- conferma prima dell’eliminazione
+- indicazione chiara quando una spesa è in modifica
+- miglioramento del layout responsive
+
+---
 
 ## Tecnologie utilizzate
 
@@ -39,10 +65,12 @@ Ogni spesa contiene almeno le seguenti informazioni:
 - **CSS3** per la personalizzazione grafica
 - **Bootstrap 5.3** per layout responsive e componenti UI
 - **JavaScript** per logica applicativa e gestione eventi
-- **Manipolazione del DOM** per aggiornare dinamicamente la dashboard
-- **localStorage** per mantenere i dati dopo il refresh
+- **DOM Manipulation** per aggiornare dinamicamente la dashboard
+- **localStorage** per mantenere i dati al refresh
 - **Chart.js** per la visualizzazione grafica delle spese
 - **Git e GitHub** per il versionamento del progetto
+
+---
 
 ## Struttura del progetto
 
@@ -53,65 +81,102 @@ web_dashboard_spese_manager/
 │   └── style.css
 ├── js/
 │   └── script.js
-└── assets/
-    └── img/
 
 
-Interfaccia dell'applicazione
 
-La dashboard è composta da diverse sezioni:
+Struttura dell’interfaccia
 
-Header introduttivo
-Form di inserimento spesa
-Riepilogo generale
-Grafico delle spese per categoria
-Sezione filtri e ricerca
-Tabella con elenco delle spese registrate
-Funzionamento del progetto
-1. Inserimento spese
+La dashboard è composta da:
 
-L’utente compila il form con descrizione, importo, categoria e data. Alla conferma, la spesa viene aggiunta all’array JavaScript e mostrata immediatamente nella tabella.
+header introduttivo
+form per l’inserimento di una nuova spesa
+riepilogo generale con totale e numero spese
+grafico delle spese per categoria
+sezione filtri, ricerca e ordinamento
+tabella dinamica con elenco delle spese registrate
 
-2. Modifica spese
 
-Ogni riga della tabella contiene un pulsante di modifica. Se l’utente decide di modificare una spesa, i dati vengono caricati nel form e possono essere salvati nuovamente.
 
-3. Eliminazione spese
+Come funziona
+1. Inserimento di una spesa
 
-Ogni spesa può essere eliminata tramite il pulsante dedicato. Prima dell’eliminazione, viene mostrata una richiesta di conferma.
+L’utente compila il form con:
 
-4. Riepilogo dinamico
+descrizione
+importo
+categoria
+data
 
-Totale delle spese e numero complessivo vengono aggiornati automaticamente ogni volta che una spesa viene aggiunta, modificata o eliminata.
+Dopo il submit, la spesa viene aggiunta all’array JavaScript, salvata in localStorage e mostrata subito nella tabella.
 
-5. Filtri e ricerca
+2. Modifica di una spesa
 
-L’utente può filtrare le spese per categoria oppure cercarle per descrizione tramite input testuale.
+Ogni riga contiene un pulsante Modifica.
+Quando viene cliccato:
 
-6. Grafico interattivo
+i dati della spesa vengono caricati nel form
+il pulsante principale cambia in Salva modifica
+al salvataggio, la spesa viene aggiornata dinamicamente
+3. Eliminazione di una spesa
 
-Le spese vengono aggregate per categoria e visualizzate con un grafico aggiornato dinamicamente. L’utente può scegliere il tipo di visualizzazione tra più opzioni.
+Ogni riga contiene un pulsante Elimina.
+Prima dell’eliminazione, viene mostrato un messaggio di conferma.
+Se confermata:
 
-Come avviare il progetto
-Clonare la repository da GitHub
-Aprire la cartella del progetto
-Avviare il file index.html nel browser
+la spesa viene rimossa dall’array
+il riepilogo viene aggiornato
+il grafico viene aggiornato
+la tabella viene aggiornata
+4. Filtri e ricerca
 
-git clone https://github.com/aitsu01/web_dashboard_spese_manager.git
+L’utente può:
+
+filtrare per categoria
+cercare per descrizione
+ordinare l’elenco per importo o data
+5. Grafico
+
+Le spese vengono raggruppate per categoria e mostrate in un grafico aggiornato automaticamente a ogni modifica dei dati.
+
 
 
 Categorie utilizzate
+
+Le categorie disponibili sono:
+
 Casa
 Cibo
 Trasporti
 Tempo libero
 Salute
 Altro
-Miglioramenti UX implementati
-Messaggi di successo, errore e avviso più chiari
-Conferma prima dell’eliminazione di una spesa
-Indicazione esplicita quando una spesa è in modifica
-Reset del form gestito correttamente
-Feedback automatici temporizzati per una migliore esperienza utente
+
+
+
+Caratteristiche responsive
+
+Il progetto è stato progettato per adattarsi a:
+
+desktop
+tablet
+smartphone
+
+Sono stati curati:
+
+layout flessibile con Bootstrap
+adattamento del form
+leggibilità dei riepiloghi
+tabella scrollabile in mobile
+miglior gestione delle azioni nella colonna finale
+
+
+Come avviare il progetto
+Clonare la repository:
+
+git clone https://github.com/aitsu01/web_dashboard_spese_manager.git
+
+
+Aprire la cartella del progetto
+Avviare il file index.html nel browser
 
 

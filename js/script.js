@@ -127,7 +127,8 @@ function renderExpenses() {
     const row = document.createElement("tr");
 
     row.innerHTML = `
-      <td>${expense.description}</td>
+      
+      <td class="description-cell">${expense.description}</td>
       <td>€ ${expense.amount.toFixed(2)}</td>
       <td>
         <span class="badge badge-category ${getCategoryBadgeClass(expense.category)}">
@@ -135,13 +136,24 @@ function renderExpenses() {
         </span>
       </td>
       <td>${formatDate(expense.date)}</td>
-      <td class="text-center">
+      <td class="text-center actions-cell">
         <div class="actions-btns">
-          <button class="btn btn-sm btn-outline-warning" onclick="editExpense(${expense.id})">
-            Modifica
+          <button
+            type="button"
+            class="btn btn-sm btn-warning action-btn"
+            onclick="editExpense(${expense.id})"
+          >
+            <i class="bi bi-pencil-square"></i>
+            <span>Modifica</span>
           </button>
-          <button class="btn btn-sm btn-outline-danger" onclick="deleteExpense(${expense.id})">
-            Elimina
+
+          <button
+            type="button"
+            class="btn btn-sm btn-danger action-btn"
+            onclick="deleteExpense(${expense.id})"
+          >
+            <i class="bi bi-trash"></i>
+            <span>Elimina</span>
           </button>
         </div>
       </td>
